@@ -1,3 +1,4 @@
+from uuid import UUID, uuid4
 from beanie import Document
 from typing import List
 from models.common_models import Address
@@ -6,9 +7,9 @@ from pydantic import Field, EmailStr
 
 class DentalClinic(Document):
     # A model containing information about a dental clinic
-    clinic_id: str
+    clinic_id: UUID = Field(default_factory=uuid4)
     name: str
-    dentists: List[str] = []  # A list containing dentist IDs
+    dentists: List[UUID] = []  # A list containing dentist IDs
     address: Address
     rating: float = Field(..., ge=0.0, le=5.0)
     email: EmailStr
