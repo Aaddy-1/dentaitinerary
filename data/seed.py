@@ -36,6 +36,7 @@ async def seed_data():
     await DentalClinic.insert_many([clinic_1, clinic_2])
     clinic_1_id = clinic_1.clinic_id
     clinic_2_id = clinic_2.clinic_id
+
     # --- Seed Dentists ---
     dentist_1 = Dentist(
         clinic_id=clinic_1_id,
@@ -45,7 +46,15 @@ async def seed_data():
         years_of_experience=15,
         languages_spoken=["English", "Hindi"],
         rating=4.9,
-        cost=SpecialtyCost(specialty="implants", cost_min=1000, cost_max=1500),
+        # Updated to a dictionary to match the new model
+        cost={
+            "implants": SpecialtyCost(
+                specialty="implants", cost_min=1000, cost_max=1500
+            ),
+            "root canal": SpecialtyCost(
+                specialty="root canal", cost_min=700, cost_max=1200
+            ),
+        },
         availability=[date(2025, 9, 10), date(2025, 9, 11), date(2025, 9, 12)],
     )
     dentist_2 = Dentist(
@@ -56,7 +65,13 @@ async def seed_data():
         years_of_experience=10,
         languages_spoken=["English", "Hindi"],
         rating=4.7,
-        cost=SpecialtyCost(specialty="cosmetic", cost_min=800, cost_max=1200),
+        # Updated to a dictionary to match the new model
+        cost={
+            "cosmetic": SpecialtyCost(
+                specialty="cosmetic", cost_min=800, cost_max=1200
+            ),
+            "veneers": SpecialtyCost(specialty="veneers", cost_min=1500, cost_max=2000),
+        },
         availability=[date(2025, 9, 15), date(2025, 9, 16)],
     )
     dentist_3 = Dentist(
@@ -67,23 +82,27 @@ async def seed_data():
         years_of_experience=8,
         languages_spoken=["English", "Spanish"],
         rating=4.5,
-        cost=SpecialtyCost(specialty="root canal", cost_min=700, cost_max=1000),
+        # Updated to a dictionary to match the new model
+        cost={
+            "root canal": SpecialtyCost(
+                specialty="root canal", cost_min=700, cost_max=1000
+            ),
+            "crowns": SpecialtyCost(specialty="crowns", cost_min=500, cost_max=800),
+        },
         availability=[date(2025, 9, 20), date(2025, 9, 21)],
     )
     await Dentist.insert_many([dentist_1, dentist_2, dentist_3])
 
     # Update clinic documents with dentist IDs
     clinic_1.dentists = [dentist_1.dentist_id, dentist_2.dentist_id]
-    # Save the updated document to the database
     await clinic_1.save()
 
     clinic_2.dentists = [dentist_3.dentist_id]
-    # Save the updated document to the database
     await clinic_2.save()
 
     # --- Seed Users ---
     user_1 = User(
-        id=clinic_1_id,
+        anonymized_id="hashed_user_id_1",  # User model expects anonymized_id, not id
         email="testuser1@example.com",
         password_hash="hashed_password_1",
         dental_needs=["implants", "veneers"],

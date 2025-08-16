@@ -3,10 +3,10 @@ import asyncio
 from dotenv import load_dotenv
 from pymongo import AsyncMongoClient
 from beanie import init_beanie
-from models.clinic_models import DentalClinic
-from models.dentist_models import Dentist
-from models.user_models import User
-from models.itinerary_models import Itinerary
+from data.models.clinic_models import DentalClinic
+from data.models.dentist_models import Dentist
+from data.models.user_models import User
+from data.models.itinerary_models import Itinerary
 
 
 async def init_db():

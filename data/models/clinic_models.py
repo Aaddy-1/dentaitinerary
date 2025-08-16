@@ -1,7 +1,7 @@
 from uuid import UUID, uuid4
 from beanie import Document
 from typing import List
-from models.common_models import Address
+from data.models.common_models import Address
 from pydantic import Field, EmailStr
 
 
