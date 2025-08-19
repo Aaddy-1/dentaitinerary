@@ -2,9 +2,10 @@
 
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
-from utils.tfidf_utils import tfidf_utils
+from src.utils.tfidf_utils import tfidf_utils
 from data.db_setup import init_db
 from data.models.dentist_models import Dentist
+import src.routers.matching_router as matching_router
 
 
 @asynccontextmanager
@@ -32,6 +33,7 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(lifespan=lifespan)
+app.include_router(matching_router.router)
 
 
 @app.get("/")
