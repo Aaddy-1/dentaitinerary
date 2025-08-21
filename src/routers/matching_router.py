@@ -7,21 +7,6 @@ from src.dependencies import get_dentist_tfidf
 router = APIRouter(prefix="/match", tags=["AI"])
 
 
-# @router.get("/users/", tags=["users"])
-# async def read_users():
-#     return [{"username": "Rick"}, {"username": "Morty"}]
-
-
-# @router.get("/users/me", tags=["users"])
-# async def read_user_me():
-#     return {"username": "fakecurrentuser"}
-
-
-# @router.get("/users/{username}", tags=["users"])
-# async def read_user(username: str):
-#     return {"username": username}
-
-
 @router.post("/dentist", tags=["dentist"])
 async def match_user_to_dentist(
     item: DentistMatchPayload,
@@ -29,6 +14,4 @@ async def match_user_to_dentist(
 ):
     dental_preferences = item.dental_preferences
     cosine_similarity = await dentist_matcher(dental_preferences, dentist_instance)
-    print(cosine_similarity)
-    return "thanks"
-    # return cosine_similarity
+    return cosine_similarity

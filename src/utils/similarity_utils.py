@@ -1,5 +1,4 @@
 from scipy.sparse import spmatrix
-from typing import List
 from sklearn.metrics.pairwise import cosine_similarity
 
 
