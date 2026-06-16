@@ -26,10 +26,8 @@ class tfidf_utils:
         print(f"Vectorizer fitted with a corpus of {len(self.corpus_ids)} documents.")
         return self.corpus_vectors
 
-    def transform_document(self, document: List[str]):
+    def transform_document(self, document: List[str]) -> csr_matrix:
         if not self.vectorizer:
             raise ValueError("Vectorizer is not fitted. Run fit_vectorizer first.")
 
         return self.vectorizer.transform(document)
-
-    # def initialize(self):

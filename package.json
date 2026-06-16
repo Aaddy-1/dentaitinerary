@@ -1,0 +1,20 @@
+{
+  "name": "dentaitinerary-ai-module",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aaddy-1/dentaitinerary.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Aaddy-1/dentaitinerary/issues"
+  },
+  "homepage": "https://github.com/Aaddy-1/dentaitinerary#readme",
+  "description": ""
+}
